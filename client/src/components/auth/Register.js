@@ -1,7 +1,10 @@
 import React from "react";
+import { Link, withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { registerUser } from "../../actions/authActions";
 import "../../stylesheets/tailwind.generated.css";
 import "../../stylesheets/mern.css";
-import { Link } from "react-router-dom";
 
 class Register extends React.Component {
   constructor(props) {
@@ -13,6 +16,21 @@ class Register extends React.Component {
       password2: "",
       errors: {},
     };
+  }
+
+  componentDidMount() {
+    // If logged in and user navigates to Register page, should redirect them to dashboard
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/dashboard");
+    }
+  }
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({
+        errors: nextProps.errors,
+      });
+    }
   }
 
   onChange = (e) => {
@@ -29,7 +47,7 @@ class Register extends React.Component {
       password2: this.state.password2,
     };
 
-    console.log(newUser);
+    this.props.registerUser(newUser, this.props.history);
   };
   render() {
     const { errors } = this.state;
@@ -86,6 +104,7 @@ class Register extends React.Component {
                   <label htmlFor="name" className="text-ph-text">
                     Name
                   </label>
+                  <span className="text-red-500">{errors.name}</span>
                 </div>
                 <div className="input-container w-full">
                   <input
@@ -100,6 +119,7 @@ class Register extends React.Component {
                   <label className="text-ph-text" htmlFor="email">
                     Email
                   </label>
+                  <span className="text-red-500">{errors.email}</span>
                 </div>
                 <div className="input-container w-full">
                   <input
@@ -114,6 +134,7 @@ class Register extends React.Component {
                   <label className="text-ph-text" htmlFor="password">
                     Password
                   </label>
+                  <span className="text-red-500">{errors.password}</span>
                 </div>
                 <div className="input-container w-full">
                   <input
@@ -128,6 +149,7 @@ class Register extends React.Component {
                   <label className="text-ph-text" htmlFor="password2">
                     Confirm Password
                   </label>
+                  <span className="text-red-500">{errors.password2}</span>
                 </div>
                 <div className="flex items-center input-container w-full">
                   <button
@@ -146,4 +168,15 @@ class Register extends React.Component {
   }
 }
 
-export default Register;
+Register.propTypes = {
+  registerUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  errors: state.errors,
+});
+
+export default connect(mapStateToProps, { registerUser })(withRouter(Register));
