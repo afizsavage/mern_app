@@ -104,7 +104,9 @@ class Register extends React.Component {
                   <label htmlFor="name" className="text-ph-text">
                     Name
                   </label>
-                  <span className="text-red-500">{errors.name}</span>
+                  <span className="absolute left-0 text-red-500">
+                    {errors.name}
+                  </span>
                 </div>
                 <div className="input-container w-full">
                   <input
@@ -119,7 +121,9 @@ class Register extends React.Component {
                   <label className="text-ph-text" htmlFor="email">
                     Email
                   </label>
-                  <span className="text-red-500">{errors.email}</span>
+                  <span className="absolute left-0 text-red-500">
+                    {errors.email}
+                  </span>
                 </div>
                 <div className="input-container w-full">
                   <input
@@ -134,7 +138,9 @@ class Register extends React.Component {
                   <label className="text-ph-text" htmlFor="password">
                     Password
                   </label>
-                  <span className="text-red-500">{errors.password}</span>
+                  <span className="absolute left-0 text-red-500">
+                    {errors.password}
+                  </span>
                 </div>
                 <div className="input-container w-full">
                   <input
@@ -149,7 +155,9 @@ class Register extends React.Component {
                   <label className="text-ph-text" htmlFor="password2">
                     Confirm Password
                   </label>
-                  <span className="text-red-500">{errors.password2}</span>
+                  <span className="absolute left-0 text-red-500">
+                    {errors.password2}
+                  </span>
                 </div>
                 <div className="flex items-center input-container w-full">
                   <button

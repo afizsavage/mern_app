@@ -103,7 +103,7 @@ class Login extends React.Component {
                   <label className="text-ph-text" htmlFor="email">
                     Email
                   </label>
-                  <span className="text-red-500">
+                  <span className="absolute left-0 text-red-500">
                     {errors.email}
                     {errors.emailnotfound}
                   </span>
@@ -121,7 +121,7 @@ class Login extends React.Component {
                   <label className="text-ph-text" htmlFor="password">
                     Password
                   </label>
-                  <span className="text-red-500">
+                  <span className="absolute left-0 text-red-500">
                     {errors.password}
                     {errors.passwordincorrect}
                   </span>
